@@ -56,3 +56,10 @@ export interface Coordinate {
     latitude  : number;
     longitude : number;
 }
+
+export interface notificationRow {
+    id : number;
+    latitude : number;
+    longitude : number;
+    email : String;
+};

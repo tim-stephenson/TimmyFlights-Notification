@@ -19,8 +19,6 @@
   },
   "homepage": "https://github.com/tim-stephenson/TimmyFlights#readme",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.154.0",
-    "@aws-sdk/lib-dynamodb": "^3.154.0",
     "axios": "^0.27.2"
   },
   "devDependencies": {

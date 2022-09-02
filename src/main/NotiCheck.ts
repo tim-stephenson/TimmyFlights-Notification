@@ -1,23 +1,22 @@
-import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import axios from "axios";
-import { notificationRow } from "../NotificationSignUpService/interfaces";
-import {TableName, dynamo} from "../NotificationSignUpService/server";
 const OpenSkysURL = "https://opensky-network.org/api/states/all";
+const TimmyFlightsBackendURL = "https://clzkel0hql.execute-api.us-east-1.amazonaws.com/default/TimmyFlights";
 import * as SecurityCredentials from "../SecurityCredentials.json" ;
-import { AllStates, FlightInfo, TrackableFlightInfo } from "./interfaces";
+import { AllStates, FlightInfo, TrackableFlightInfo, notificationRow } from "./interfaces";
 import isApproaching from "./util/isApproaching";
 
 
-export default async function NotiCheck(){
+
+export async function NotiCheck(){
     try{
-    const [scanResult, OpenSkysResponse] = await Promise.all([
-        dynamo.send( new ScanCommand({ TableName: TableName }) ), 
+    const [backendResponse, OpenSkysResponse] = await Promise.all([
+        axios.get(TimmyFlightsBackendURL) ,
         axios.get(OpenSkysURL, {auth : {username : SecurityCredentials.username, password : SecurityCredentials.password }})
     ]);
     if(OpenSkysResponse.status != 200){
         throw new Error(`Got a status of ${OpenSkysResponse.status} from OpenSkys`);
     }
-    IterateOverFlightsAndNotifies(ParseFlightData( OpenSkysResponse.data), scanResult.Items as notificationRow[] );
+    IterateOverFlightsAndNotifies(ParseFlightData( OpenSkysResponse.data), backendResponse.data.Items as notificationRow[] );
     }catch(err){
         console.log("got error ", err);
     }
