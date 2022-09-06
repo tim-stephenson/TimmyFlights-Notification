@@ -6,24 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/index.js",
-    "compile": "tsc && bash ./scripts/copyPackageJSON.sh && cd ./dist && npm i --omit=dev && bash ./../scripts/zip.sh"
+    "compile": "tsc && bash ./scripts/copyPackageJSON.sh && cd ./dist && npm ci --omit=dev && bash ./../scripts/zip.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tim-stephenson/TimmyFlights.git"
+    "url": "TODO git+https://github.com/tim-stephenson/TimmyFlights.git"
   },
   "author": "Timothy Stephenson",
   "license": "GPL-3.0+",
   "bugs": {
-    "url": "https://github.com/tim-stephenson/TimmyFlights/issues"
+    "url": "TODO https://github.com/tim-stephenson/TimmyFlights/issues"
   },
-  "homepage": "https://github.com/tim-stephenson/TimmyFlights#readme",
+  "homepage": "TODO https://github.com/tim-stephenson/TimmyFlights#readme",
   "dependencies": {
     "axios": "^0.27.2"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
-    "@types/node": "^18.7.13",
+    "@types/node": "^18.7.14",
     "typescript": "^4.8.2"
   }
 }

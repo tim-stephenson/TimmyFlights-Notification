@@ -8,6 +8,7 @@ import isApproaching from "./util/isApproaching";
 
 
 export async function NotiCheck(){
+    console.log("Starting NotiCheck");
     try{
     const [backendResponse, OpenSkysResponse] = await Promise.all([
         axios.get(TimmyFlightsBackendURL) ,
@@ -16,6 +17,12 @@ export async function NotiCheck(){
     if(OpenSkysResponse.status != 200){
         throw new Error(`Got a status of ${OpenSkysResponse.status} from OpenSkys`);
     }
+    if(backendResponse.status != 200){
+        throw new Error(`Got a status of ${OpenSkysResponse.status} from our backend`);
+    }
+    console.log("Successfully Called NotiCheck");
+    console.log("OpenSkies Response:", OpenSkysResponse);
+    console.log("backend Response:", backendResponse);
     IterateOverFlightsAndNotifies(ParseFlightData( OpenSkysResponse.data), backendResponse.data.Items as notificationRow[] );
     }catch(err){
         console.log("got error ", err);
@@ -64,7 +71,6 @@ function IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifies : not
     flightList.forEach( (flight) => {
         if(FlightHasNeededInfo(flight)){
             notifies.forEach( (row) => {
-                flight.time_position
                 if(isApproaching(row, flight as TrackableFlightInfo)){
                     console.log("Give ", row, " a message about incoming flight ", flight);
                 }
