@@ -25,7 +25,7 @@ export async function NotiCheck(){
     console.log("backend Response:", backendResponse);
     IterateOverFlightsAndNotifies(ParseFlightData( OpenSkysResponse.data), backendResponse.data.Items as notificationRow[] );
     }catch(err){
-        console.log("got error ", err);
+        console.log("GOT ERROR:", err);
     }
 
     
@@ -68,6 +68,7 @@ const FlightHasNeededInfo = (flightInfo : FlightInfo) => (
 
 
 function IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifies : notificationRow[]){
+    console.log(flightList);
     flightList.forEach( (flight) => {
         if(FlightHasNeededInfo(flight)){
             notifies.forEach( (row) => {
