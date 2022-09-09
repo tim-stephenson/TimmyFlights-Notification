@@ -68,7 +68,6 @@ const FlightHasNeededInfo = (flightInfo : FlightInfo) => (
 
 
 function IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifies : notificationRow[]){
-    console.log(flightList);
     flightList.forEach( (flight) => {
         if(FlightHasNeededInfo(flight)){
             notifies.forEach( (row) => {
