@@ -13,10 +13,7 @@ export default async function SendEmail(user : notificationRow, flight : FlightI
         host: "email-smtp.us-east-1.amazonaws.com",
         port: 465,
         secure: true,
-        auth: {
-            user: SecurityCredentials.STMPusername, 
-            pass: SecurityCredentials.STMPpassword, 
-        },
+        auth: SecurityCredentials.STMP,
         });
 
     

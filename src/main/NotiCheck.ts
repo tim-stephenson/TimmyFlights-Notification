@@ -13,7 +13,7 @@ export async function NotiCheck(){
     try{
     const [backendResponse, OpenSkysResponse] = await Promise.all([
         axios.get(TimmyFlightsBackendURL) ,
-        axios.get(OpenSkysURL, {auth : {username : SecurityCredentials.username, password : SecurityCredentials.password }})
+        axios.get(OpenSkysURL, {auth : SecurityCredentials.OpenSkyNetwork})
     ]);
     if(OpenSkysResponse.status != 200){
         throw new Error(`Got a status of ${OpenSkysResponse.status} from OpenSkys`);

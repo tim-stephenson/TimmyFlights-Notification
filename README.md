@@ -5,8 +5,22 @@ Notification Sign-up info from: [TimmyFlights-Backend](https://github.com/tim-st
 
 
 ## Dev notes:
-### OpenSky Network Account:
-A `src/SecurityCredentials.json` file is needed with two fields, username and password, associated with a [OpenSky Network](https://opensky-network.org/) Account. This is how you data on planes is received. This file is added to .gitignore so I do not leak my own account
+
+### Account plain auth credentials
+A `src/SecurityCredentials.json` is needed with two auth objects in it, OpenSkyNetwork and SMTP, with a structure as seen bellow:
+```json
+{
+	"OpenSkyNetwork" : {
+		"username": "",
+		"password": ""
+	},
+	"STMP" : {
+		"user" : "",
+		"pass" : ""
+	}
+}
+```
+
 
 ### Compiling Script
 The typescript code compiles into javascript in the `dist/` folder and copies `package.json` and `package-lock.json` there with the `"npm run compile"` script. 
