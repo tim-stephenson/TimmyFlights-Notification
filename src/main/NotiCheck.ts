@@ -4,6 +4,7 @@ const TimmyFlightsBackendURL = "https://clzkel0hql.execute-api.us-east-1.amazona
 import * as SecurityCredentials from "../SecurityCredentials.json" ;
 import { AllStates, FlightInfo, TrackableFlightInfo, notificationRow } from "./interfaces";
 import isApproaching from "./util/isApproaching";
+import SendEmail from "./SendEmail";
 
 
 
@@ -67,12 +68,13 @@ const FlightHasNeededInfo = (flightInfo : FlightInfo) => (
 
 
 
-function IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifies : notificationRow[]){
+async function  IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifies : notificationRow[]){
     flightList.forEach( (flight) => {
         if(FlightHasNeededInfo(flight)){
-            notifies.forEach( (row) => {
+            notifies.forEach( async (row) => {
                 if(isApproaching(row, flight as TrackableFlightInfo)){
                     console.log("Give ", row, " a message about incoming flight ", flight);
+                    await SendEmail(row, flight);
                 }
             } )
         }
