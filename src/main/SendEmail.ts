@@ -14,7 +14,7 @@ export default async function SendEmail(user : notificationRow, flight : FlightI
         port: 465,
         secure: true,
         auth: SecurityCredentials.STMP,
-        });
+    });
 
     
     const verification = await transporter.verify();

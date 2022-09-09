@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/index.js",
+    "start": "node dist/init",
     "compile": "tsc && bash ./scripts/copyPackageJSON.sh && cd ./dist && npm ci --omit=dev && bash ./../scripts/zip.sh"
   },
   "repository": {
