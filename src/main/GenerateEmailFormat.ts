@@ -11,10 +11,12 @@ export default async function GenerateEmailFormat(user : notificationRow, flight
         format : 'jpg',
         scale : '2',
         maptype : 'satellite',
-        markers : `size:tiny|${user.latitude},${user.longitude}`,
+        markers : [`size:tiny|${toString(user)}`, `size:tiny|color:white|${toString(flight as Coordinate)}` , `size:tiny|color:purple|${toString(point)}` ],
+        path : `geodesic:true|color:0xff0000ff|weight:2|${toString(flight as Coordinate)}|${toString(point)}`,
         key : SecurityCredentials.GoogleMapsPlatformKey
-
-    }} )
+    },
+    responseType : 'arraybuffer'       
+} )
     return({
         to: [user.email], // list of receivers
         subject: `Incoming Flight overhead: ${flight.callsign} `, // Subject line
@@ -40,4 +42,9 @@ export default async function GenerateEmailFormat(user : notificationRow, flight
         ],
       }
     );
+}
+
+
+function toString(point : Coordinate){
+    return `${point.latitude},${point.longitude}`
 }
