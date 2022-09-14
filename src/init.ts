@@ -1,2 +1,2 @@
-import { NotiCheck } from "./main/NotiCheck";
+import NotiCheck  from "./main/NotiCheck";
 NotiCheck();

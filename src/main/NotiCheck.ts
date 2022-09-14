@@ -9,7 +9,7 @@ import GenerateEmailFormat from "./GenerateEmailFormat";
 
 
 
-export async function NotiCheck(){
+export default async function NotiCheck(){
     console.log("Starting NotiCheck");
     try{
     const [backendResponse, OpenSkysResponse] = await Promise.all([
