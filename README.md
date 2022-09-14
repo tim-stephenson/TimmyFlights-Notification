@@ -17,7 +17,8 @@ A `src/SecurityCredentials.json` is needed with two auth objects in it, OpenSkyN
 	"STMP" : {
 		"user" : "",
 		"pass" : ""
-	}
+	},
+	"GoogleMapsPlatformKey" : ""
 }
 ```
 

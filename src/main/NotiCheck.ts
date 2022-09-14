@@ -5,6 +5,7 @@ import * as SecurityCredentials from "../SecurityCredentials.json" ;
 import { AllStates, FlightInfo, TrackableFlightInfo, notificationRow } from "./interfaces";
 import isApproaching from "./util/isApproaching";
 import SendEmail from "./SendEmail";
+import GenerateEmailFormat from "./GenerateEmailFormat";
 
 
 
@@ -75,7 +76,7 @@ async function  IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifie
                 const point = isApproaching(row, flight as TrackableFlightInfo)
                 if(point){
                     console.log("Give ", row, " a message about incoming flight ", flight, " with the closest point of: ", point);
-                    await SendEmail(row, flight, point);
+                    await SendEmail( await GenerateEmailFormat( row, flight, point ) );
                 }
             } )
         }
