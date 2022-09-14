@@ -72,9 +72,10 @@ async function  IterateOverFlightsAndNotifies(flightList : FlightInfo[], notifie
     flightList.forEach( (flight) => {
         if(FlightHasNeededInfo(flight)){
             notifies.forEach( async (row) => {
-                if(isApproaching(row, flight as TrackableFlightInfo)){
-                    console.log("Give ", row, " a message about incoming flight ", flight);
-                    await SendEmail(row, flight);
+                const point = isApproaching(row, flight as TrackableFlightInfo)
+                if(point){
+                    console.log("Give ", row, " a message about incoming flight ", flight, " with the closest point of: ", point);
+                    await SendEmail(row, flight, point);
                 }
             } )
         }

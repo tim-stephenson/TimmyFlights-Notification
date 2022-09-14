@@ -1,4 +1,4 @@
-import { FlightInfo, notificationRow } from "./interfaces";
+import { Coordinate, FlightInfo, notificationRow } from "./interfaces";
 
 import SecurityCredentials from "../SecurityCredentials.json";
 
@@ -7,7 +7,7 @@ import {createTransport} from "nodemailer";
 
 
 
-export default async function SendEmail(user : notificationRow, flight : FlightInfo ){
+export default async function SendEmail(user : notificationRow, flight : FlightInfo, point : Coordinate ){
 
     const transporter = createTransport({
         host: "email-smtp.us-east-1.amazonaws.com",
@@ -18,27 +18,31 @@ export default async function SendEmail(user : notificationRow, flight : FlightI
 
     
     const verification = await transporter.verify();
-    console.log("VERIFICATION", verification);
+    console.log("VERIFICATION: ", verification);
 
     const info = await transporter.sendMail({
         from: '"TimmyFlights" <no-reply@TimmyFlights.tech>', // sender address
         to: [user.email], // list of receivers
-        subject: "Test Subject Line", // Subject line
+        subject: `Incoming Flight overhead: ${flight.callsign} `, // Subject line
         text: "Hello world?", // plain text body
         // html: "<b>Hello world?</b>", // html body
         attachments : [
             {
-            filename : 'flightInfo.json',
-            content : JSON.stringify(flight)
+                filename : 'flightInfo.json',
+                content : JSON.stringify(flight, null, " ")
             },
             {
-            filename : 'userInfo.json',
-            content : JSON.stringify(user)
+                filename : 'userInfo.json',
+                content : JSON.stringify(user, null, " ")
+            },
+            {
+                filename : 'point.json',
+                content : JSON.stringify(point, null , " ")
             }
         ],
         priority : 'normal'
       }
     );
-    console.log("INFO FROM SENT EMAIL", info);
+    console.log("INFO FROM SENT EMAIL: ", info);
 
 }

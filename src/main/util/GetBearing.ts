@@ -12,5 +12,5 @@ export default function GetBearing(source: Coordinate, destination: Coordinate){
     const x = Math.cos(φ1)*Math.sin(φ2) -
               Math.sin(φ1)*Math.cos(φ2)*Math.cos(λ2-λ1);
     const θ = Math.atan2(y, x);
-    return toDegree(θ);
+    return (360 + toDegree(θ) ) % 360;
 }
